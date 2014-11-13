@@ -1,0 +1,95 @@
+body {
+	background: #dbffb5;
+	/* position: relative; */
+	margin: 0px;
+	padding: 0px;
+}
+
+#bloc_page {
+	min-width: 500px; max-width: 1000px;
+	text-align: center;
+	position: relative;
+	display: block;
+	background: #cfdb9d;
+	margin-left: auto; margin-right: auto;
+	margin-top: -1.25em;
+}
+
+#title{
+	text-decoration: none;
+}
+
+#inter {
+	position: relative;
+	text-align: left;
+}
+
+/* ****************************************************** ASIDE *************************************************** */
+#menu_aside {
+	float: left;
+	position: absolute;
+	margin-left: 0px;
+	width: 200px;
+	display: inline-block;
+	padding: 10px;
+	background: #cfdb9d;
+}
+
+#menu_aside ul  {
+	
+	padding: 0px;
+	margin: 0px;
+	overflow-y: scroll;
+	height: 500px;
+}
+
+#menu_aside li {
+	background: #5d332b;
+	text-decoration: none;
+	display: block;
+	padding: 5px;
+	font-weight: bold;
+	color: #dbffb5;
+}
+
+#menu_aside li:hover{
+	background: #cfdb9d;
+	color: #5d332b;
+}
+
+#menu_aside a {
+	text-decoration: none;
+}
+
+/* ****************************************************** INFORMATION *************************************************** */
+#information {
+	display: inline-block;
+	position: relative;
+	left: 220px;
+	min-width: 200px; max-width: 770px;
+	text-align: justify;
+	padding: 0px;
+	margin: 0px;
+	background: #cfdb9d;
+}
+
+#image {
+	position: relative;
+	display: inline-block;
+	padding: 5px;
+	float: right;
+	width: 150px;
+}
+
+#content {
+	
+}
+
+#plus {
+	background: #e1c48b;
+	border-radius: 7px;
+}
+
+#formulaire {
+	margin-left: 50px;
+}
