@@ -163,8 +163,8 @@ CREATE TABLE IF NOT EXISTS `membres` (
 --
 
 INSERT INTO `membres` (`id`, `login`, `pass_md5`) VALUES
-(1, 'adminUO', '1c35754ea803d05d1500cb5e5401011a'),
-(2, 'Admin', 'cd13c40674411f4480040590d08e9035');
+(1, 'adminUO', '1136b2610ea0f7d87a950371326a205b '), /*Piou*/
+(2, 'Admin', 'cd13c40674411f4480040590d08e9035'); /*Mouahaha*/
 
 -- --------------------------------------------------------
 
