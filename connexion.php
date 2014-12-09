@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion') {
 	if ((isset($_POST['login']) && !empty($_POST['login'])) && (isset($_POST['pass']) && !empty($_POST['pass']))) {
 		//Vérification du login et du mot de passe haché.
 		include('connectionbdd.php');
-		$sql = $bdd->query("SELECT * FROM membres WHERE id=1");
+		$sql = $bdd->query("SELECT * FROM membres WHERE login='".$_POST['login']."'");
 		$data = $sql->fetch();
 		
 		

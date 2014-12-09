@@ -1,4 +1,4 @@
-body {
+﻿body {
 	background: #dbffb5;
 	/* position: relative; */
 	margin: 0px;
@@ -93,3 +93,10 @@ body {
 #formulaire {
 	margin-left: 50px;
 }
+
+#addM label {
+	display: block;
+	width: 150px;
+	float: left;
+}
+

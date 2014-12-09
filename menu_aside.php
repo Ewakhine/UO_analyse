@@ -1,23 +1,4 @@
-<nav id="menu_aside">
-	<ul>
-		<!--<a href="ratgeant.php"><li>Rats Géants</li></a>-->
-		<a href="crapaud.php"><li>Crapauds Géants</li></a>
-		<a href="chsouris.php"><li>Chauve-souris Géantes</li></a>
-		<!--<a href="kobold.php"><li>Kobolds</li></a>
-		<a href="loup.php"><li>Loups</li></a>
-		<a href="araigneeeclipsante.php"><li>Araignées éclipsantes</li></a>
-		<a href="frguerriere.php"><li>Fourmis guerrières géantes</li></a>
-		<a href="frreine.php"><li>Fourmis reines</li></a>
-		<a href="hommelezard.php"><li>Hommes-Lézards</li></a>
-		<a href="mangecoeur.php"><li>Manges-Coeur</li></a>
-		<a href="araigneesabre.php"><li>Araignées sabres</li></a>
-		<a href="araigneepiegeuse.php"><li>Araignées piégeuses</li></a>
-		<a href="amepeine.php"><li>Âmes en peine</li></a>
-		<a href="fantome.php"><li>Fantômes</li></a>
-		<a href="espritterrifiant.php"><li>Esprits terrifiants</li></a>
-		<a href="doppleganger.php"><li>Dopplegangers</li></a>
-		<a href="assassinrunique.php"><li>Assassins runiques</li></a>
-		<a href="angenoir.php"><li>Anges noirs</li></a>
+<!--
 		<a href="gobelin.php"><li>Gobelins</li></a>
 		<a href="shamangobelin.php"><li>Shamans gobelins</li></a>
 		<a href="gobelinarcher.php"><li>Gobelins archers</li></a>
@@ -71,6 +52,21 @@
 		<a href="griffonargente.php"><li>Griffons argentés</li></a>
 		<a href="araigneecolossale.php"><li>Araignées colossales</li></a>
 		<a href="gnoll.php"><li>Gnolls</li></a>
-		<a href="gandrezc.php"><li>Gandrezcs</li></a>-->
+		<a href="gandrezc.php"><li>Gandrezcs</li></a>
+	</ul>
+</nav>-->
+
+<nav id="menu_aside">
+	<ul>
+		<?php if (isset($_SESSION['login']) && $_SESSION['login']=="Admin" && isset($_SESSION['pass'])) { ?>
+		<a href="addmonster.php"><li>Add Monster</li></a>
+		<?php }
+		$array_monster = array (
+			1 => "Rats Géants", "Crapauds Géants", "Chauve-souris Géantes", "Kobolds", "Loups", "Araignées éclipsantes", "Fourmis guerrières géantes", "Fourmis reines", "Hommes-Lézards", "Manges-Coeur", "Araignées sabres", "Araignées piégeuses", "Âmes en peine", "Fantômes", "Esprits terrifiants", "Dopplegangers", "Assassins runiques", "Anges noirs", "Gobelin");
+			
+		foreach ($array_monster as $key => $value) {
+			echo "<a href=fichemonstre.php?id=".$key."><li>".$value."</li></a>";
+		}
+	?>
 	</ul>
 </nav>

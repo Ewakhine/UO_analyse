@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="robots" content="">
 		<link rel="stylesheet" href="style.css" />
 		<!--[if lt IE 9]>

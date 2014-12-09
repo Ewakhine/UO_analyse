@@ -44,32 +44,31 @@ function afficher_caract($nom, $nom_bdd, $niveau)
 		
 		$caract = $bdd->query("SELECT * FROM pv WHERE id ='".$idCar."'");
 		$pv = $caract->fetch();
-		
 ?>
 		<p>
 			<?php if($attaque['nb'] > 0) {
 			$ecart = pow((($attaque['sum_2']/$attaque['nb'])-(pow($attaque['sum'],2)/pow($attaque['nb'],2))),(1/2) );	?>
-			<strong>Attaque :</strong> <?php echo $attaque['jet']; ?> ( moyenne : <?php echo ($attaque['sum']/$attaque['nb']); ?> - écart-type : <?php echo $ecart; ?> ) [ estimation : <?php echo $attaque['nb']; ?> ]<br /><br /> <?php } ?>
+			<strong>Attaque :</strong> <?php echo number_format($attaque['jet'],2); ?> ( moyenne : <?php echo number_format(($attaque['sum']/$attaque['nb']),2); ?> - écart-type : <?php echo number_format($ecart,2); ?> ) [ estimation : <?php echo $attaque['nb']; ?> ]<br /><br /> <?php } ?>
 			
 			<?php if($degat['nb'] > 0) {
 			$ecart = pow((($degat['sum_2']/$degat['nb'])-(pow($degat['sum'],2)/pow($degat['nb'],2))),(1/2) );	?>
-			<strong>Dégâts :</strong> <?php echo $degat['jet']; ?> ( moyenne : <?php echo ($degat['sum']/$degat['nb']); ?> - écart-type : <?php echo $ecart; ?> ) [ estimation : <?php echo $degat['nb']; ?> ]<br /><br /> <?php } ?>
+			<strong>Dégâts :</strong> <?php echo number_format($degat['jet'],2); ?> ( moyenne : <?php echo number_format(($degat['sum']/$degat['nb']),2); ?> - écart-type : <?php echo number_format($ecart,2); ?> ) [ estimation : <?php echo $degat['nb']; ?> ]<br /><br /> <?php } ?>
 			
 			<?php if($defense['nb'] > 0) {
 			$ecart = pow((($defense['sum_2']/$defense['nb'])-(pow($defense['sum'],2)/pow($defense['nb'],2))),(1/2) );	?>
-			<strong>Défense :</strong> <?php echo $defense['jet']; ?> ( moyenne : <?php echo ($defense['sum']/$defense['nb']); ?> - écart-type : <?php echo $ecart; ?> ) [ estimation : <?php echo $defense['nb']; ?> ]<br /><br /> <?php } ?>
+			<strong>Défense :</strong> <?php echo number_format($defense['jet'],2); ?> ( moyenne : <?php echo number_format(($defense['sum']/$defense['nb']),2); ?> - écart-type : <?php echo number_format($ecart,2); ?> ) [ estimation : <?php echo $defense['nb']; ?> ]<br /><br /> <?php } ?>
 			
 			<?php if($pv['nb'] > 0) {
 			$ecart = pow((($pv['sum_2']/$pv['nb'])-(pow($pv['sum'],2)/pow($pv['nb'],2))),(1/2) );	?>
-			<strong>PV :</strong> <?php echo $pv['jet']; ?> ( moyenne : <?php echo ($pv['sum']/$pv['nb']); ?> - écart-type : <?php echo $ecart; ?> ) [ estimation : <?php echo $pv['nb']; ?> ]<br /><br /> <?php } ?>
+			<strong>PV :</strong> <?php echo number_format($pv['jet'],2); ?> ( moyenne : <?php echo number_format(($pv['sum']/$pv['nb']),2); ?> - écart-type : <?php echo number_format($ecart,2); ?> ) [ estimation : <?php echo $pv['nb']; ?> ]<br /><br /> <?php } ?>
 			
 			<?php if($armure['nb'] > 0) {
 			$ecart = pow((($armure['sum_2']/$armure['nb'])-(pow($armure['sum'],2)/pow($armure['nb'],2))),(1/2) );	?>
-			<strong>Armure :</strong> <?php echo $armure['jet']; ?> ( moyenne : <?php echo ($armure['sum']/$armure['nb']); ?> - écart-type : <?php echo $ecart; ?> ) [ estimation : <?php echo $armure['nb']; ?> ]<br /><br /> <?php } ?>
+			<strong>Armure :</strong> <?php echo number_format($armure['jet'],2); ?> ( moyenne : <?php echo number_format(($armure['sum']/$armure['nb']),2); ?> - écart-type : <?php echo number_format($ecart,2); ?> ) [ estimation : <?php echo $armure['nb']; ?> ]<br /><br /> <?php } ?>
 			
 			<?php if($mm['nb'] > 0) {
 			$ecart = pow((($mm['sum_2']/$mm['nb'])-(pow($mm['sum'],2)/pow($mm['nb'],2))),(1/2) );	?>
-			<strong>Maitrise de la magie :</strong> <?php echo $mm['jet']; ?> ( moyenne : <?php echo ($mm['sum']/$m['nb']); ?> - écart-type : <?php echo $ecart; ?> ) [ estimation : <?php echo $mm['nb']; ?> ] <?php } ?>
+			<strong>Maitrise de la magie :</strong> <?php echo number_format($mm['jet'],2); ?> ( moyenne : <?php echo number_format(($mm['sum']/$m['nb']),2); ?> - écart-type : <?php echo number_format($ecart,2); ?> ) [ estimation : <?php echo $mm['nb']; ?> ] <?php } ?>
 		</p>
 <?php
 		$caract->closeCursor();
@@ -204,5 +203,112 @@ function ajouter_donnee ($nom_bdd)
 		}			
 		$donnee1->closeCursor();
 	}
+}
+
+
+
+
+/* Function		:	fiche_monstre
+** Input		:	STRING $Nom, STRING $Nom_bdd, STRING $Nom_page, STRING $Nom_image, STRING $Description, INT $lvlmin, INT $lvlmax
+** OUTPUT		:	Aucun
+** Description	:	Génère la fiche d'un monstre.
+** Creator		: 	Ewakhine Do'varden
+** Date 		: 	08 / 12 / 2014 */
+
+function fiche_monstre($Nom, $Nom_bdd, $Nom_page, $Nom_image, $Description, $lvlmin, $lvlmax) {
+include ('menu_aside.php');
+
+
+$Nom_image='img/'.$Nom_image;
+?>
+
+<section id="information">
+	<h3><?php echo $Nom; ?></h3>
+	
+	<aside id="plus">
+		<table>
+			<td><strong>Obtenir plus d'informations : </strong></td>
+			<td><form id="formulaire" method="post" action=<?php echo $Nom_page; ?>>
+				<select name="level">
+					<option value="choix0">-- Base --</options>
+					<?php
+					for ($i=$lvlmin; $i < $lvlmax + 1; $i++) {
+						echo '<option value="choix'.$i.'">Niveau '.$i.'</option>';
+					}
+					?>
+				</select>
+				<input type="submit" name="visualiser" />
+			</form></td>
+		</table>
+	</aside>
+	
+<?php
+	if (!isset($_POST['level']) || (isset($_POST['level']) && $_POST['level'] == 'choix0') )
+	{
+?>	
+	<article id="content">
+		<h4>Appréciation de l'UO :</h4>
+		<p>Une petite appréciation de nos experts.</p>
+	
+		<h4>Description</h4>
+		<?php if ($Nom_image != "img/") { ?><img id="image" src=<?php echo $Nom_image; ?> />
+		<?php }
+		echo $Description; ?>
+	</article>	
+	
+<?php
+	}
+	
+		for ($niveau = $lvlmin; $niveau < $lvlmax + 1; $niveau++)
+	{
+		if (isset($_POST['visualiser']) && isset($_POST['level']) && $_POST['level'] == 'choix'.$niveau)
+		{			
+			afficher_caract($Nom, $Nom_bdd, $niveau);
+			if (isset($_SESSION['login']) && isset($_SESSION['pass'])) {
+		?>
+			<form method="post" action=<?php echo $Nom_page; ?>>
+				<input type="submit" name="infos" value="J'apporte des infos !" />
+				<input type="hidden" name="level" value="<?php echo $_POST['level']; ?>" />
+			</form>
+		<?php
+			}
+		}
+	}
+	
+	if(isset($_POST['infos']) && isset($_POST['level'])) {
+		$niveau =  $_POST['level'];
+		$niv = explode("x", $niveau);
+		
+		afficher_caract($Nom, $Nom_bdd, $niv[1]);
+		?>
+			
+		<form method="post" action=<?php echo $Nom_page; ?>>
+			<select name="caract">
+				<option value="attaque">Attaque</option>
+				<option value="defense">Défense</option>
+				<option value="degat">Dégâts</option>
+				<option value="armure">Armure</option>
+				<option value="mm">Maitrise de la magie</option>
+				<option value="pv">PV</option>
+			</select>
+			
+			<input type="text" name="valeur" />
+			<input type="hidden" name="level" value="<?php echo $_POST['level']; ?>" />
+			
+			<input type="submit" name="valider" value="Valider" />
+		</form>		
+	<?php
+	}
+	
+	if(isset($_POST['valider']) && isset($_POST['level']) && isset($_POST['caract']) && $_POST['valeur'] != null)
+	{
+		ajouter_donnee ($Nom_bdd);
+		?>
+		<form method="post" action=<?php echo $Nom_page; ?>>
+			<input type="hidden" name="level" value="<?php echo $_POST['level']; ?>" />
+			<input type="submit" name="infos" value="Retour"/>
+		</form>
+	<?php }
+echo "</section>";
 }
 ?>
